@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Actions {
@@ -21,6 +23,22 @@ public class Actions {
         for (String wordContent : inputWords) {
             Word word = new Word(wordContent);
             dictionary.add(word);
+        }
+        dictionary.analyze();
+    }
+
+    public void analyseFile(String fileName) {
+        Dictionary dictionary = new Dictionary();
+        try (Scanner fileScanner = new Scanner(Paths.get(fileName))) {
+            while (fileScanner.hasNextLine()) {
+                String[] wordsFromLine = fileScanner.nextLine().split(" ");
+                for (String wordContent : wordsFromLine) {
+                    Word word = new Word(wordContent);
+                    dictionary.add(word);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
         }
         dictionary.analyze();
     }

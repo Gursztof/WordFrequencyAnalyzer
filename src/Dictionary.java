@@ -8,15 +8,10 @@ public class Dictionary {
         this.size = 0;
     }
 
-    // TODO OPTIMIZE and better naming
     public void add(Word word) {
-        if (contains(word)) {
-            for (int i = 0; i < size; i++) {
-                Word compered = words[i];
-                if (compered.equals(word)) {
-                    compered.addCount();
-                }
-            }
+        Word match = contains(word);
+        if (match != null) {
+            match.addCount();
         } else {
             if (size >= words.length) {
                 grow();
@@ -26,24 +21,14 @@ public class Dictionary {
         }
     }
 
-    public Word get(Word comparable) {
-        for (Word word : words) {
-            if (word.equals(comparable)) {
-                return word;
-            }
-        }
-        return null;
-    }
-
-    // BETTER NAMING CHEAKER
-    public boolean contains(Word word) {
+    public Word contains(Word word) {
         for (int i = 0; i < size; i++) {
             Word compered = words[i];
             if (compered.equals(word)) {
-                return true;
+                return compered;
             }
         }
-        return false;
+        return null;
     }
 
     public Word mostCommon() {
@@ -57,7 +42,6 @@ public class Dictionary {
         return leaderWord;
     }
 
-    // TODO Better naming.
     private void sort() {
         for (int i = 0; i < size - 1; i++) {
             for (int j = i + 1; j <= size - 1; j++) {
@@ -83,12 +67,11 @@ public class Dictionary {
         words = newWords;
     }
 
-    // TODO BETTER NAMINGIN
     public void analyze() {
         sort();
         for (int i = 0; i < size; i++) {
-            // WHY I CANT DEVIDE IT WITH ()??
-            ProgressBar progressBar = new ProgressBar(100 * words[i].getCount() / mostCommon().getCount());
+            int fillPercentage = 100 * words[i].getCount() / mostCommon().getCount();
+            ProgressBar progressBar = new ProgressBar(fillPercentage);
             System.out.println(words[i] + " " + progressBar);
         }
     }

@@ -12,7 +12,6 @@ public class UserInterface {
         this.action = new Actions(scanner);
     }
 
-    // Better naming for makeaction
     public void start() {
         while (true) {
             getInput();
@@ -23,7 +22,7 @@ public class UserInterface {
         }
     }
 
-    // TODO better naming needed. Clearing the varaibles evrytime new input
+    // TODO find better way of clearing data everytime.
     public void getInput() {
         // Clear old data
         this.command = "";
@@ -33,7 +32,6 @@ public class UserInterface {
         String input = scanner.nextLine();
         String[] splitInput = input.split(" ");
         this.command = splitInput[0];
-        // DOWODZIEC SIE JAK DZIAAL TWORZEBIE ARRAY
         if (splitInput.length > 1) {
             this.content = splitInput[1];
         }
@@ -46,9 +44,8 @@ public class UserInterface {
                 if (content.isEmpty()) {
                     action.analyseUserInput();
                 } else {
-                    System.out.println("IN WORKING...");
+                    action.analyseFile(content);
                 }
-                System.out.println("tet1");
             }
             default -> System.out.println("Invalid command, for more info please use command help");
         }

@@ -3,7 +3,8 @@ public class Word {
     private int count;
 
     public Word(String content) {
-        this.content = content;
+        String cleanContent = content.replaceAll("\\p{P}", "").toLowerCase();
+        this.content = cleanContent;
         this.count = 1;
     }
 
@@ -19,6 +20,7 @@ public class Word {
         count++;
     }
 
+    @Override
     public boolean equals(Object comparable) {
         if (comparable == this) {
             return true;

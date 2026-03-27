@@ -5,7 +5,6 @@ public class ProgressBar {
         this.fillPercentage = fillPercentage;
     }
 
-    // TODO BETTER NAMNG CUZ ITS NOT ROUDING
     private int roundPercentage() {
         int toRemove = fillPercentage % 5;
         return (fillPercentage - toRemove) / 5;
@@ -17,8 +16,8 @@ public class ProgressBar {
         for (int i = roundPercentage(); i >= 0; i--) {
             progressBar += "█";
         }
-        // NEED EXPLAINING MAGIC NUMBER 20 !!@!312   20 is 100% 0f how much squeres there can be
-        for (int i = 20 - roundPercentage(); i >= 0; i--) {
+        // 20 is max amount there can be in progress bar (100%)
+        for (int i = 20 - roundPercentage(); i > 0; i--) {
             progressBar += " ";
         }
         progressBar += "]";
